@@ -1,6 +1,6 @@
-# vivi
+# Vue-Cli with webpack4 - 一个基于 webpack4 建立的 Vue-Cli 脚手架应用(包含最新可用部件)
 
-> Website for Viviker
+> 通过 vue init webpack xxx 建立基于 webpack3 的脚手架应用更新到最新到 webpack4, 内置填坑指南 (敢于使用 ESLint 的一套系统)
 
 ## Build Setup
 

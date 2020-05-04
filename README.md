@@ -37,10 +37,21 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 ```js
 // ...省略 (原始行号 10 上下)    
 // const ExtractTextPlugin = require('extract-text-webpack-plugin') // 原有插件引用行注释掉    
-const MiniCssExtractPlugin = require('mini-css-extract-plugin) // 引入新插件代替    
+const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 引入新插件代替    
 // ...省略
 
 // ...省略 (原始行号 27 上下)
 devtool: config.build.productionSourceMap ? config.build.devtool : false, // 此行原始文件中应该已自动生成, 如没找到可以自己添加
 performance: { hints: false }, // 此行手动添加, 与 devtool,output,plugins 等同级
+// ...省略
+
+// ...省略 (原始行号 40 上下)
+uglifyOptions: {
+    compress: {
+        warnings: false
+    }
+},
+// 把其中的 compress 节点删除掉, 在新版的 UglifyJsPlugin 2.1或以上的版本中, warning已经是 options的一个直接属性, 不需要跟在 compress 节点下, 如下:
+uglifyOptions: { warning: false },
+// ...省略
 ```

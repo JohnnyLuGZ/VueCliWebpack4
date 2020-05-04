@@ -33,10 +33,14 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 > 1. webpack4 推荐使用插件 mini-css-extract-plugin 代替旧有 extract-text-webpack-plugin (需要手动更改配置)    
 > 目标位置: /build/webpack.prod.conf.js    
->    
-> // ...省略 (原始行号 10 上下)    
-> // const ExtractTextPlugin = require('extract-text-webpack-plugin') // 原有插件引用行注释掉    
-> const MiniCssExtractPlugin = require('mini-css-extract-plugin) // 引入新插件代替    
-> // ...省略
->    
-> // ...省略 (原始行号 27 上下)
+
+```js
+// ...省略 (原始行号 10 上下)    
+// const ExtractTextPlugin = require('extract-text-webpack-plugin') // 原有插件引用行注释掉    
+const MiniCssExtractPlugin = require('mini-css-extract-plugin) // 引入新插件代替    
+// ...省略
+
+// ...省略 (原始行号 27 上下)
+devtool: config.build.productionSourceMap ? config.build.devtool : false, // 此行原始文件中应该已自动生成, 如没找到可以自己添加
+performance: { hints: false }, // 此行手动添加, 与 devtool,output,plugins 等同级
+```

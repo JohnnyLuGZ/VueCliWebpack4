@@ -31,8 +31,12 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 ## Differences from webpack3 to webpack4 - 从 webpack3 到 webpack4 的不同
 
-> 1. webpack4 推荐使用插件 mini-css-extract-plugin 代替旧有 extract-text-webpack-plugin (需要手动更改配置)\<br>
-> 目标位置: /build/webpack.prod.conf.js\<br>\<br>
-> // ...省略\<br>
-> // const ExtractTextPlugin = require('extract-text-webpack-plugin')\<br>
-> const MiniCssExtractPlugin = require('mini-css-extract-plugin)
+> 1. webpack4 推荐使用插件 mini-css-extract-plugin 代替旧有 extract-text-webpack-plugin (需要手动更改配置)    
+> 目标位置: /build/webpack.prod.conf.js    
+>    
+> // ...省略 (原始行号 10 上下)    
+> // const ExtractTextPlugin = require('extract-text-webpack-plugin') // 原有插件引用行注释掉    
+> const MiniCssExtractPlugin = require('mini-css-extract-plugin) // 引入新插件代替    
+> // ...省略
+>    
+> // ...省略 (原始行号 27 上下)

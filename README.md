@@ -54,4 +54,20 @@ uglifyOptions: {
 // 把其中的 compress 节点删除掉, 在新版的 UglifyJsPlugin 2.1或以上的版本中, warning已经是 options的一个直接属性, 不需要跟在 compress 节点下, 如下:
 uglifyOptions: { warning: false },
 // ...省略
+
+// ...省略 (原始行号 45 上下) 把原旧有插件 extract-text-webpack-plugin 配置注释掉, 添加 mini-css-extract-plugin 插件配置
+// new ExtractTextPlugin({
+//     filename: utils.assetsPath('css/[name].[contenthash].css'),
+//     allChunks: true,
+// }),
+new miniCssExtractPlugin({
+
+}),
 ```
+
+> 2. 去掉 webpack.optimize.CommonsChunkPlugin 相关配置, 原始文件共有3处相关配置需要注释掉    
+> 目标位置: /build/webpack.prod.conf.js     
+>    
+> (原始行号 82 上下) new webpack.optimize.CommonsChunkPlugin    
+> (原始行号 97 上下) new webpack.optimize.CommonsChunkPlugin    
+> (原始行号 104 上下) new webpack.optimize.CommonsChunkPlugin

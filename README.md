@@ -71,3 +71,41 @@ new miniCssExtractPlugin({
 > (原始行号 82 上下) new webpack.optimize.CommonsChunkPlugin    
 > (原始行号 97 上下) new webpack.optimize.CommonsChunkPlugin    
 > (原始行号 104 上下) new webpack.optimize.CommonsChunkPlugin
+
+> 3. 增加 optimization 配置, 与 output,devtool,plugins 等同级    
+> 目标位置: /build/webpack.prod.conf.js    
+
+```js
+optimization: {
+	runtimeChunk: { name: 'manifest' },
+	minimizer: [
+		new UglifyJsPlugin({
+			cache: true,
+			parallel: false,
+			sourceMap: config.build.productionSourceMap,
+			uglifyOptions: {
+				warnings: false
+			}
+		}),
+		new OptimizeCSSPlugin({
+			cssProcessorOptions: config.build.productionSourceMap ? { safe: true, map: { inline: false } } : { safe: true }
+		})
+	],
+	splitChunks: {
+		chunks: 'async',
+		minSize: 30000,
+		minChunks: 1,
+		maxAsyncRequests: 5,
+		maxInitialRequests: 3,
+		name: false,
+		cacheGroups: {
+			vendors: {
+				test: /[\\/]node_modules[\\/]/,
+				name: 'vendor',
+				chunks: 'initial',
+				priority: -10
+			}
+		}
+	}
+},
+```

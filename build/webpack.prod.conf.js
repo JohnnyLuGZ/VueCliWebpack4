@@ -29,6 +29,38 @@ const webpackConfig = merge(baseWebpackConfig, {
     	filename: utils.assetsPath('js/[name].[chunkhash].js'),
     	chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
 	},
+	optimization: {
+		runtimeChunk: { name: 'manifest' },
+		minimizer: [
+			new UglifyJsPlugin({
+				cache: true,
+				parallel: false,
+				sourceMap: config.build.productionSourceMap,
+				uglifyOptions: {
+					warnings: false
+				}
+			}),
+			new OptimizeCSSPlugin({
+				cssProcessorOptions: config.build.productionSourceMap ? { safe: true, map: { inline: false } } : { safe: true }
+			})
+		],
+		splitChunks: {
+			chunks: 'async',
+			minSize: 30000,
+			minChunks: 1,
+			maxAsyncRequests: 5,
+			maxInitialRequests: 3,
+			name: false,
+			cacheGroups: {
+				vendors: {
+					test: /[\\/]node_modules[\\/]/,
+					name: 'vendor',
+					chunks: 'initial',
+					priority: -10
+				}
+			}
+		}
+	},
 	plugins: [
     	// http://vuejs.github.io/vue-loader/en/workflow/production.html
     	new webpack.DefinePlugin({

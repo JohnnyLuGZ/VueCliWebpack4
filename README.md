@@ -109,3 +109,25 @@ optimization: {
 	}
 },
 ```
+
+> 4. 修改 utils 相关配置
+> 目标位置: /build/utils.js    
+
+```js
+// ...省略 (原始行号 4 上下)    
+// const ExtractTextPlugin = require('extract-text-webpack-plugin') // 原有插件引用行注释掉    
+const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 引入新插件代替    
+// ...省略
+
+// ... 省略 (原始行号 49 上下) 注释掉原有旧插件的配置并修改为新插件配置
+if (options.extract) {
+    // return ExtractTextPlugin.extract({
+    //     use: loaders,
+    //     fallback: 'vue-style-loader'
+	// })
+	return [MiniCssExtractPlugin.loader].concat(loaders)
+} else {
+    return ['vue-style-loader'].concat(loaders)
+}
+// ... 省略
+```

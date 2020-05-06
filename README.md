@@ -121,13 +121,26 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 引入新插�
 
 // ... 省略 (原始行号 49 上下) 注释掉原有旧插件的配置并修改为新插件配置
 if (options.extract) {
-    // return ExtractTextPlugin.extract({
-    //     use: loaders,
-    //     fallback: 'vue-style-loader'
+	// return ExtractTextPlugin.extract({
+	//     use: loaders,
+	//     fallback: 'vue-style-loader'
 	// })
 	return [MiniCssExtractPlugin.loader].concat(loaders)
 } else {
     return ['vue-style-loader'].concat(loaders)
+}
+// ... 省略
+```
+
+> 5. 增加 mode 配置
+> 目标位置: /build/webpack.base.conf.js
+
+```js
+// ... 省略 (原始行号 23 上下)
+module.exports = {
+	mode: process.env.NODE_ENV === 'production' ? 'production' : 'development', // 此行必须手动添加,本不存在
+	context: path.resolve(__dirname, '../'), // 此行本来已经存在,如不存在请也手动添加
+	// ... 省略
 }
 // ... 省略
 ```

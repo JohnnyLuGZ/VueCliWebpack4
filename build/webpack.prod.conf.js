@@ -11,6 +11,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const miniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const VueLoaderPlugin = require("vue-loader/lib/plugin")
 
 const env = process.env.NODE_ENV === 'testing' ? require('../config/test.env') : require('../config/prod.env')
 
@@ -66,6 +67,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     	new webpack.DefinePlugin({
     		'process.env': env
 		}),
+		new VueLoaderPlugin(),
     	new UglifyJsPlugin({
     		uglifyOptions: { warnings: false },
     		sourceMap: config.build.productionSourceMap,
@@ -107,7 +109,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     		chunksSortMode: 'dependency'
     	}),
     	// keep module.id stable when vendor modules does not change
-    	new webpack.ids.HashedModuleIdsPlugin(),
+    	new webpack.HashedModuleIdsPlugin(),
     	// enable scope hoisting
     	new webpack.optimize.ModuleConcatenationPlugin(),
     	// split vendor js into its own file

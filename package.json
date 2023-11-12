@@ -14,7 +14,7 @@
     	"build": "node build/build.js"
 	},
 	"dependencies": {
-    	"axios": "^0.21.1",
+    	"axios": "^1.6.0",
     	"fsevents": "^2.2.1",
     	"vue": "^2.6.12",
     	"vue-router": "^3.4.9"
